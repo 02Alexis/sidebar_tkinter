@@ -8,13 +8,14 @@ class FormMasterDesign(tk.Tk):
     
     def __init__(self):
         super().__init__()
-        self.logo = util_image.read_image("./img/KIRITO.webp", (560, 136))
+        self.logo = util_image.read_image("./img/KIRITO.webp", (236, 560))
         self.profile = util_image.read_image("./img/logo.png", (100, 100))
         self.icon = util_image.read_image("./img/profile.jpg", (32, 32)) 
         self.config_window()
         self.panels()
         self.upper_bar_controls()
         self.sidebar_controls()
+        self.body_controls()
 
     def config_window(self):
         # configuración inicial de la ventana
@@ -93,6 +94,12 @@ class FormMasterDesign(tk.Tk):
         for text, icon, button in buttons_info:
             self.config_btn_menu(button, text, icon, font_awesome, ancho_menu, alto_menu)
 
+    def body_controls(self):
+        # Imagen en el cuerpo principal
+        label = tk.Label(self.principal_body, image=self.logo,
+                         bg=COLOR_MAIN_BOSY)
+        label.place(x=0, y=0, relwidth=1, relheight=1)
+    
     def config_btn_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu):
         button.config(text=f" {icon}   {text}", anchor="w", font=font_awesome,
                       bd=0, bg=COLOR_LATERAL_BAR, fg="white", width=ancho_menu, height=alto_menu)
