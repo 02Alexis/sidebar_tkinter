@@ -9,10 +9,12 @@ class FormMasterDesign(tk.Tk):
     def __init__(self):
         super().__init__()
         self.logo = util_image.read_image("./img/KIRITO.webp", (560, 136))
-        self.profile = util_image.read_image("./img/perfil.jpg", (100, 100))
+        self.profile = util_image.read_image("./img/logo.png", (100, 100))
         self.icon = util_image.read_image("./img/profile.jpg", (32, 32)) 
         self.config_window()
         self.panels()
+        self.upper_bar_controls()
+        self.sidebar_controls()
 
     def config_window(self):
         # configuración inicial de la ventana
@@ -36,3 +38,63 @@ class FormMasterDesign(tk.Tk):
             self, bg=COLOR_MAIN_BOSY
         )
         self.principal_body.pack(side=tk.RIGHT, fill='both', expand=True)
+
+    def upper_bar_controls(self):
+        #configuración de la barra superior
+        font_awesome = font.Font(family='FontAwesome', size=12) 
+        
+        #Etiqueta de titulo
+        self.labeltitle = tk.Label(self.superior_bar, text="Alexis")
+        self.labeltitle.config(fg="#ffffff", font=(
+            "Roboto", 15
+        ), bg=COLOR_UPPER_BAR, pady=10, width=16)
+        self.labeltitle.pack(side=tk.LEFT)
+
+        #Botón menu lateral
+        self.btnmenulateral = tk.Button(self.superior_bar, text="\uf0c9", font=font_awesome,
+                                bd=0, bg=COLOR_UPPER_BAR, fg="white")
+        self.btnmenulateral.pack(side=tk.LEFT)
+
+        #Etiqueta de información
+        self.labeltitle = tk.Label(
+            self.superior_bar, text="Dev Full Stack")
+        self.labeltitle.config(fg="#ffffff", font=(
+            "Roboto", 15
+        ), bg=COLOR_UPPER_BAR, padx=10, width=20)
+        self.labeltitle.pack(side=tk.RIGHT)
+
+    def sidebar_controls(self):
+        # configuración del menú lateral
+        ancho_menu = 20
+        alto_menu = 2
+        font_awesome = font.Font(family="FontAwesome", size=15)
+
+        # Etiqueta de perfil
+        self.labelprofile = tk.Label(
+            self.menu_lateral, image=self.profile, bg=COLOR_LATERAL_BAR
+        )
+        self.labelprofile.pack(side=tk.TOP, pady=10)
+
+        # Botón del menu lateral
+        self.btndashbord = tk.Button(self.menu_lateral)
+        self.btnprofile = tk.Button(self.menu_lateral)
+        self.btnpicture = tk.Button(self.menu_lateral)
+        self.btninfo = tk.Button(self.menu_lateral)
+        self.btnsettings = tk.Button(self.menu_lateral)
+
+        buttons_info = [
+            ("Dashboard", "\uf109", self.btndashbord)
+            ("Profile", "\uf007", self.btnprofile)
+            ("Picture", "\uf03e", self.btnpicture)
+            ("Info", "\uf129", self.btninfo)
+            ("Settings", "\uf013", self.btnsettings)
+        ]
+
+        for text, icon, button in buttons_info:
+            self.config_btn_menu(button, text, icon, font_awesome, ancho_menu, alto_menu)
+
+    def config_btn_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu):
+        button.config(text=f" {icon}   {text}", anchor="w", font=font_awesome,
+                      bd=0, bg=COLOR_LATERAL_BAR, fg="white", width=ancho_menu, height=alto_menu)
+        button.pack(side=tk.TOP)
+        self.bind_hover_events(button)
