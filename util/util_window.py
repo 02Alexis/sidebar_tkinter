@@ -1,7 +1,9 @@
-def center_window(window, application_width, application_long):
-    window_width = window.winfo_screenwidth()
-    window_long = window.winfo_screenheight()
-    x = int((window_width/2) - (window_long/2))
-    y = int((window_long/2) - (window_width/2))
-    return window.geometry(f"{application_width}x{application_long+{x}+{y}}")
+def center_window(window, application_width, application_height):
+    # Obtener las dimensiones de la pantalla
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    # Calcular las coordenadas x e y para centrar la ventana
+    x = int((screen_width/2) - (application_width /2))
+    y = int((screen_height/2) - (application_height /2))
+    window.geometry(f"{application_width}x{application_height}+{x}+{y}")
     
