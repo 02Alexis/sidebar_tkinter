@@ -83,11 +83,11 @@ class FormMasterDesign(tk.Tk):
         self.btnsettings = tk.Button(self.menu_lateral)
 
         buttons_info = [
-            ("Dashboard", "\uf109", self.btndashbord)
-            ("Profile", "\uf007", self.btnprofile)
-            ("Picture", "\uf03e", self.btnpicture)
-            ("Info", "\uf129", self.btninfo)
-            ("Settings", "\uf013", self.btnsettings)
+            ("Dashboard", "\uf109", self.btndashbord),
+            ("Profile", "\uf007", self.btnprofile),
+            ("Picture", "\uf03e", self.btnpicture),
+            ("Info", "\uf129", self.btninfo),
+            ("Settings", "\uf013", self.btnsettings),
         ]
 
         for text, icon, button in buttons_info:
@@ -98,3 +98,17 @@ class FormMasterDesign(tk.Tk):
                       bd=0, bg=COLOR_LATERAL_BAR, fg="white", width=ancho_menu, height=alto_menu)
         button.pack(side=tk.TOP)
         self.bind_hover_events(button)
+
+    def bind_hover_events(self, button):
+        # Asociar eventos enter y leave con la función dinámica
+        button.bind("<Enter>", lambda event: self.on_enter(event, button))
+        button.bind("<Leave>", lambda event: self.on_leave(event, button))
+
+    def on_enter(self, event, button):
+        # Cambiar estilo al pasar el ratón por encima
+        button.config(bg=COLOR_HOVER, fg="white")
+
+    def on_leave(self, event, button):
+        # Cambiar estilo al pasar el ratón por encima
+        button.config(bg=COLOR_LATERAL_BAR, fg="white")
+
