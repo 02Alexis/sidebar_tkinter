@@ -52,7 +52,7 @@ class FormMasterDesign(tk.Tk):
 
         #Botón menu lateral
         self.btnmenulateral = tk.Button(self.superior_bar, text="\uf0c9", font=font_awesome,
-                                bd=0, bg=COLOR_UPPER_BAR, fg="white")
+                               command=self.toggle_panel,  bd=0, bg=COLOR_UPPER_BAR, fg="white")
         self.btnmenulateral.pack(side=tk.LEFT)
 
         #Etiqueta de información
@@ -112,3 +112,9 @@ class FormMasterDesign(tk.Tk):
         # Cambiar estilo al pasar el ratón por encima
         button.config(bg=COLOR_LATERAL_BAR, fg="white")
 
+    def toggle_panel(self):
+        # A lternar visivilidad del menú lateral
+        if self.menu_lateral.winfo_ismapped():
+            self.menu_lateral.pack_forget()
+        else:
+            self.menu_lateral.pack(side=tk.LEFT, fill="y")
