@@ -3,6 +3,8 @@ from tkinter import font
 from config import COLOR_HOVER, COLOR_LATERAL_BAR, COLOR_MAIN_BOSY, COLOR_UPPER_BAR
 import util.util_window as util_window
 import util.util_image as util_image
+from forms.form_info_design import FormInfoDesign
+
 
 class FormMasterDesign(tk.Tk):
     
@@ -84,15 +86,15 @@ class FormMasterDesign(tk.Tk):
         self.btnsettings = tk.Button(self.menu_lateral)
 
         buttons_info = [
-            ("Dashboard", "\uf109", self.btndashbord),
-            ("Profile", "\uf007", self.btnprofile),
-            ("Picture", "\uf03e", self.btnpicture),
-            ("Info", "\uf129", self.btninfo),
-            ("Settings", "\uf013", self.btnsettings),
+            ("Dashboard", "\uf109", self.btndashbord, self.open_info_panel),
+            ("Profile", "\uf007", self.btnprofile, self.open_info_panel),
+            ("Picture", "\uf03e", self.btnpicture, self.open_info_panel),
+            ("Info", "\uf129", self.btninfo, self.open_info_panel),
+            ("Settings", "\uf013", self.btnsettings, self.open_info_panel),
         ]
 
-        for text, icon, button in buttons_info:
-            self.config_btn_menu(button, text, icon, font_awesome, ancho_menu, alto_menu)
+        for text, icon, button, comando in buttons_info:
+            self.config_btn_menu(button, text, icon, font_awesome, ancho_menu, alto_menu, comando)
 
     def body_controls(self):
         # Imagen en el cuerpo principal
@@ -100,9 +102,9 @@ class FormMasterDesign(tk.Tk):
                          bg=COLOR_MAIN_BOSY)
         label.place(x=0, y=0, relwidth=1, relheight=1)
     
-    def config_btn_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu):
+    def config_btn_menu(self, button, text, icon, font_awesome, ancho_menu, alto_menu, comando):
         button.config(text=f" {icon}   {text}", anchor="w", font=font_awesome,
-                      bd=0, bg=COLOR_LATERAL_BAR, fg="white", width=ancho_menu, height=alto_menu)
+                      bd=0, bg=COLOR_LATERAL_BAR, fg="white", width=ancho_menu, height=alto_menu, command=comando)
         button.pack(side=tk.TOP)
         self.bind_hover_events(button)
 
@@ -125,3 +127,6 @@ class FormMasterDesign(tk.Tk):
             self.menu_lateral.pack_forget()
         else:
             self.menu_lateral.pack(side=tk.LEFT, fill="y")
+        
+    def open_info_panel(self):
+        FormInfoDesign()
