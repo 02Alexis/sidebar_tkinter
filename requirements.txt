@@ -1,0 +1,5 @@
+fontawesome==5.10.1.post1
+fonttools==4.56.0
+matplotlib==3.8.1
+packaging==24.2
+pillow==11.1.0
