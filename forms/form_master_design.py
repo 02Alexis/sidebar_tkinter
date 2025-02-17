@@ -4,7 +4,7 @@ from config import COLOR_HOVER, COLOR_LATERAL_BAR, COLOR_MAIN_BOSY, COLOR_UPPER_
 import util.util_window as util_window
 import util.util_image as util_image
 from forms.form_info_design import FormInfoDesign
-
+from forms.form_build_site import FormBuildSiteDesign
 
 class FormMasterDesign(tk.Tk):
     
@@ -12,6 +12,7 @@ class FormMasterDesign(tk.Tk):
         super().__init__()
         self.logo = util_image.read_image("./img/KIRITO.webp", (236, 560))
         self.profile = util_image.read_image("./img/logo.png", (100, 100))
+        self.img_build_site = util_image.read_image("./img/sitio_construccion.png", (100, 100))
         self.icon = util_image.read_image("./img/profile.jpg", (32, 32)) 
         self.config_window()
         self.panels()
@@ -86,11 +87,11 @@ class FormMasterDesign(tk.Tk):
         self.btnsettings = tk.Button(self.menu_lateral)
 
         buttons_info = [
-            ("Dashboard", "\uf109", self.btndashbord, self.open_info_panel),
-            ("Profile", "\uf007", self.btnprofile, self.open_info_panel),
-            ("Picture", "\uf03e", self.btnpicture, self.open_info_panel),
+            ("Dashboard", "\uf109", self.btndashbord, self.open_panel_in_build),
+            ("Profile", "\uf007", self.btnprofile, self.open_panel_in_build),
+            ("Picture", "\uf03e", self.btnpicture, self.open_panel_in_build),
             ("Info", "\uf129", self.btninfo, self.open_info_panel),
-            ("Settings", "\uf013", self.btnsettings, self.open_info_panel),
+            ("Settings", "\uf013", self.btnsettings, self.open_panel_in_build),
         ]
 
         for text, icon, button, comando in buttons_info:
@@ -130,3 +131,11 @@ class FormMasterDesign(tk.Tk):
         
     def open_info_panel(self):
         FormInfoDesign()
+
+    def open_panel_in_build(self):
+        self.clean_panel(self.principal_body)
+        FormBuildSiteDesign(self.principal_body, self.img_build_site)
+
+    def clean_panel(self, panel):
+        for widget in panel.winfo_children():
+            widget.destroy()
