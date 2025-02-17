@@ -5,6 +5,7 @@ import util.util_window as util_window
 import util.util_image as util_image
 from forms.form_info_design import FormInfoDesign
 from forms.form_build_site import FormBuildSiteDesign
+from forms.form_graphics_design import FormGraphicsDesign
 
 class FormMasterDesign(tk.Tk):
     
@@ -87,7 +88,7 @@ class FormMasterDesign(tk.Tk):
         self.btnsettings = tk.Button(self.menu_lateral)
 
         buttons_info = [
-            ("Dashboard", "\uf109", self.btndashbord, self.open_panel_in_build),
+            ("Dashboard", "\uf109", self.btndashbord, self.open_panel_graphic),
             ("Profile", "\uf007", self.btnprofile, self.open_panel_in_build),
             ("Picture", "\uf03e", self.btnpicture, self.open_panel_in_build),
             ("Info", "\uf129", self.btninfo, self.open_info_panel),
@@ -139,3 +140,7 @@ class FormMasterDesign(tk.Tk):
     def clean_panel(self, panel):
         for widget in panel.winfo_children():
             widget.destroy()
+
+    def open_panel_graphic(self):
+        self.clean_panel(self.principal_body)
+        FormGraphicsDesign(self.principal_body)

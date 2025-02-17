@@ -5,7 +5,6 @@ from config import COLOR_MAIN_BOSY
 
 class FormBuildSiteDesign():
     def __init__(self, main_panel, logo):
-        super().__init__()
         self.upper_bar = tk.Frame(main_panel)
         self.upper_bar.pack(side=tk.TOP, fill=tk.X, expand=False)
 
